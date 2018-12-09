@@ -16,24 +16,58 @@ app.use(morgan('short'))
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
 
+
+//ajouter un singe
 app.post('/addmonkey', function(req, res){
   models.singes.create({
     Nom : req.body.Nom,
     Race : req.body.Race,
-    Age : req.body.Age
+    Age : req.body.Age, 
+    Cage : req.body.Cage
   })
   .then(()=> {
     res.send('Monkey added ! ')
   })
 })
 
+//ajouter une cage
+app.post('/addcage', function(req, res){
+  models.cages.create({
+    Number : req.body.Number
+  })
+  .then(()=> {
+    res.send('Cage added ! ')
+  })
+})
 
+//afficher tous les singes
 app.get('/singes', function(req, res) {
    models.singes.findAll() 
    .then ((singes) => {
-      res.render( 'index', { title : 'Singes', message : models.singes.Nom })
+      //res.render( 'index', { title : 'Singes', message : models.singes.Nom })
+      res.json(singes)
    })
 })
+
+//isoler un singe
+app.get('/singes/:id', function(req, res) {
+  models.singes.findOne({
+  id : req.params.id 
+  })
+  .then ((singe) => {
+   // res.render('index', {title : 'Singe n ' + req.params.id, message : json(singe)})
+      res.json(singe)
+
+  })
+
+})
+
+
+
+
+
+
+
 
 // Get all the users defined
 /*app.get('/', function (req, res) {
