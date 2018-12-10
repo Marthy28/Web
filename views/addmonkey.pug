@@ -1,0 +1,11 @@
+html
+  head
+    title= title
+
+  body
+
+    form(method='POST' action='/addmonkey')
+      div.form-group
+        label(for='Nom') Nom:
+          input#Nom.form-control(type='text', placeholder='ex : Jean_Marie', name='Nom')
+      button.btn.btn-primary(type='submit') Sign up

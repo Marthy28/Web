@@ -18,12 +18,15 @@ app.use(morgan('short'))
 
 
 //ajouter un singe
+ app.get('/addmonkey', function (req, res) {
+  res.render( 'addmonkey', { title : 'Singes'})
+});
+
 app.post('/addmonkey', function(req, res){
   models.singes.create({
     Nom : req.body.Nom,
     Race : req.body.Race,
-    Age : req.body.Age, 
-    Cage : req.body.Cage
+    Age : req.body.Age
   })
   .then(()=> {
     res.send('Monkey added ! ')
@@ -43,9 +46,8 @@ app.post('/addcage', function(req, res){
 //afficher tous les singes
 app.get('/singes', function(req, res) {
    models.singes.findAll() 
-   .then ((singes) => {
-      //res.render( 'index', { title : 'Singes', message : models.singes.Nom })
-      res.json(singes)
+   .then ((singe) => {
+      res.render( 'index', { title : 'Singes',message : "singes", singes : singe })
    })
 })
 
