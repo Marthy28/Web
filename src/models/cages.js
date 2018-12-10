@@ -1,6 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
-	    var cages = sequelize.define('singes', {
-     Id : DataTypes.INTEGER
-    });  
+
+    var cages = sequelize.define('cages', {
+     Number : DataTypes.INTEGER
+    });
+  
     return cages;
   };

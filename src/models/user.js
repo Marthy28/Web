@@ -7,10 +7,4 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     return singes;
-
-    var cages = sequelize.define('cages', {
-     Id : DataTypes.INTEGER
-    });
-  
-    return cages;
   };

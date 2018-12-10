@@ -30,8 +30,8 @@ app.post('/addmonkey', function(req, res){
 
 app.get('/singes', function(req, res) {
    models.singes.findAll() 
-   .then ((singes) => {
-      res.render( 'index', { title : 'Singes', message : models.singes.Nom })
+   .then ((singe) => {
+      res.render( 'index', { title : 'Singes',message : "singes", singes : singe })
    })
 })
 
