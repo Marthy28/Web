@@ -35,6 +35,7 @@ app.post('/addmonkey', function(req, res){
 })
 
 //ajouter une cage
+<<<<<<< HEAD
 app.get('/addcage', function (req, res) {
  res.render( 'addcage', { title : "Ajout d'une cage"})
 });
@@ -53,18 +54,60 @@ app.get('/singes', function(req, res) {
    models.singes.findAll()
    .then ((singe) => {
       res.render( 'index', { title : 'Singes', singes : singe })
+=======
+app.post('/addcage', function(req, res){
+  models.cages.create({
+    Number : req.body.Number
+  })
+  .then(()=> {
+    res.send('Cage added ! ')
+  })
+})
+
+//afficher tous les singes
+app.get('/singes', function(req, res) {
+   models.singes.findAll() 
+   .then ((singe) => {
+      res.render( 'index', { title : 'Singes',message : "singes", singes : singe })
+>>>>>>> fe8a1b200f1200e39cdff383b2b7ced8b8713c49
    })
 })
 
 //isoler un singe
 app.get('/singes/:id', function(req, res) {
   models.singes.findOne({
+<<<<<<< HEAD
       id : req.params.id
   })
   .then ((singe) => {
     res.render('monkey', {title : 'Singe n ' + req.params.id, singes : singe})
   })
 
+=======
+  id : req.params.id 
+  })
+  .then ((singe) => {
+   // res.render('index', {title : 'Singe n ' + req.params.id, message : json(singe)})
+      res.json(singe)
+
+  })
+
+})
+
+
+
+
+
+
+
+
+// Get all the users defined
+/*app.get('/', function (req, res) {
+  models.User.findAll()
+    .then((users) => {
+      res.json(users)
+    })
+>>>>>>> fe8a1b200f1200e39cdff383b2b7ced8b8713c49
 })
 
 //supprmier un singe
