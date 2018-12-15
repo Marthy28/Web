@@ -1,0 +1,12 @@
+html
+  head
+    title= title
+
+  body
+    vous Voulez vous ajoutez une cage ? Oui.
+
+    form(method='POST' action='/addcage')
+      div.form-group
+        label(for='Number') Number:
+          input#Nom.form-control(type='text', placeholder='Numero de la cage', name='Number')
+        button.btn.btn-primary(type='submit') Sign up

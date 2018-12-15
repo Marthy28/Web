@@ -1,0 +1,11 @@
+head
+  title= title
+
+body
+
+  h3 Pauvre bête... quel est son identifiant ? 
+  form(method='DELETE' action='/deletesinge')
+    div.form-group
+      label(for='Nom') Nom:
+        input#Nom.form-control(type='text', placeholder='ex : IUT', name='Nom')
+      button.btn.btn-primary(type='submit') Valider

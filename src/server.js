@@ -16,42 +16,85 @@ app.use(morgan('short'))
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
 
+
+//ajouter un singe
+ app.get('/addmonkey', function (req, res) {
+  res.render( 'addmonkey', { title : 'Singes'})
+});
+
 app.post('/addmonkey', function(req, res){
   models.singes.create({
     Nom : req.body.Nom,
     Race : req.body.Race,
-    Age : req.body.Age
+    Age : req.body.Age,
+    Cage : req.body.Cage
   })
   .then(()=> {
     res.send('Monkey added ! ')
   })
 })
 
+//ajouter une cage
+app.get('/addcage', function (req, res) {
+ res.render( 'addcage', { title : "Ajout d'une cage"})
+});
 
+app.post('/addcage', function(req, res){
+  models.cages.create({
+    Number : req.body.Number
+  })
+  .then(()=> {
+    res.send('Cage added !')
+  })
+})
+
+//afficher tous les singes
 app.get('/singes', function(req, res) {
-   models.singes.findAll() 
+   models.singes.findAll()
    .then ((singe) => {
-      res.render( 'index', { title : 'Singes',message : "singes", singes : singe })
+      res.render( 'index', { title : 'Singes', singes : singe })
    })
 })
 
-// Get all the users defined
-/*app.get('/', function (req, res) {
-  models.User.findAll()
-    .then((users) => {
-      res.json(users)
-    })
+//isoler un singe
+app.get('/singes/:id', function(req, res) {
+  models.singes.findOne({
+      id : req.params.id
+  })
+  .then ((singe) => {
+    res.render('monkey', {title : 'Singe n ' + req.params.id, singes : singe})
+  })
+
 })
 
-// Add a new user to the database
-app.post('/', function(req, res) {
-  models.User.create({
-    username: req.body.username
+//supprmier un singe
+app.get('/deletesinge', function (req, res) {
+ res.render( 'deletesinge', { title : 'supprmier singe'})
+});
+
+app.delete('/deletesinge/:Nom', function(req, res){
+  models.singes.destroy({
+    where : {
+       Nom : req.params.Nom
+    }
   })
-    .then(() => {
-      res.send('User added !')
-    })
-})*/
+  .then(()=> {
+    res.send('Monkey deleted !')
+  })
+})
+
+
+app.post('/users/delete', function(req, res, next) {
+
+   models.singes.destroy({
+    where : { id : req.body.id }
+  });
+});
+
+
+
+
+
 
 // Synchronize models
 models.sequelize.sync().then(function() {

@@ -4,7 +4,10 @@ html
 
 
   body
-    h1= message 
-    ul
-      for singe in singes
-        li= singe.Nom
+    h1= message
+    form(method="post" action="/users/delete")
+      ul
+        for singe in singes
+          li= singe.Nom
+          li= singe.id
+            button#id.form-control(name='#{singe.id}') Supprimer
