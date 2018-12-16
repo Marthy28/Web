@@ -35,7 +35,6 @@ app.post('/addmonkey', function(req, res){
 })
 
 //ajouter une cage
-<<<<<<< HEAD
 app.get('/addcage', function (req, res) {
  res.render( 'addcage', { title : "Ajout d'une cage"})
 });
@@ -54,7 +53,9 @@ app.get('/singes', function(req, res) {
    models.singes.findAll()
    .then ((singe) => {
       res.render( 'index', { title : 'Singes', singes : singe })
-=======
+   })
+})	  
+
 app.post('/addcage', function(req, res){
   models.cages.create({
     Number : req.body.Number
@@ -69,34 +70,27 @@ app.get('/singes', function(req, res) {
    models.singes.findAll() 
    .then ((singe) => {
       res.render( 'index', { title : 'Singes',message : "singes", singes : singe })
->>>>>>> fe8a1b200f1200e39cdff383b2b7ced8b8713c49
    })
 })
 
 //isoler un singe
 app.get('/singes/:id', function(req, res) {
   models.singes.findOne({
-<<<<<<< HEAD
       id : req.params.id
   })
   .then ((singe) => {
     res.render('monkey', {title : 'Singe n ' + req.params.id, singes : singe})
   })
-
-=======
-  id : req.params.id 
-  })
-  .then ((singe) => {
-   // res.render('index', {title : 'Singe n ' + req.params.id, message : json(singe)})
-      res.json(singe)
-
-  })
-
 })
 
 
 
+app.post('/users/delete', function(req, res, next) {
 
+   models.singes.destroy({
+    where : { id : req.body.id }
+  });
+});
 
 
 
@@ -107,7 +101,6 @@ app.get('/singes/:id', function(req, res) {
     .then((users) => {
       res.json(users)
     })
->>>>>>> fe8a1b200f1200e39cdff383b2b7ced8b8713c49
 })
 
 //supprmier un singe
@@ -127,12 +120,7 @@ app.delete('/deletesinge/:Nom', function(req, res){
 })
 
 
-app.post('/users/delete', function(req, res, next) {
 
-   models.singes.destroy({
-    where : { id : req.body.id }
-  });
-});
 
 
 
@@ -149,7 +137,6 @@ models.sequelize.sync().then(function() {
     app.listen(/*process.env.PORT*/3000, function() {
     console.log('Express server listening on port 3000');
   })
-});
 
   /*app.get('/',function(req,res){
     res.send("Hello World !")
